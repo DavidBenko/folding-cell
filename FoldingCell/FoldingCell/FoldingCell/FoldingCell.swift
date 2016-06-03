@@ -120,6 +120,7 @@ public class FoldingCell: UITableViewCell {
   }
   
   func createAnimationView() {
+    
     let anAnimationView = UIView(frame: containerView.frame)
     anAnimationView.layer.cornerRadius = foregroundView.layer.cornerRadius
     anAnimationView.backgroundColor = UIColor.clearColor()
@@ -154,9 +155,9 @@ public class FoldingCell: UITableViewCell {
         anAnimationView.addConstraint(newConstraint)
       }
     }
-    
     animationView = anAnimationView
   }
+
   
   func addImageItemsToAnimationView() {
     containerView.alpha = 1;
@@ -209,7 +210,7 @@ public class FoldingCell: UITableViewCell {
       rotatedView.tag = tag
       
       yPosition += itemHeight
-      tag++;
+      tag += 1;
     }
     
     containerView.alpha = 0;
@@ -225,6 +226,16 @@ public class FoldingCell: UITableViewCell {
     }
     animationItemViews = createAnimationItemView()
   }
+  
+  private func removeImageItemsFromAnimationView() {
+    
+    guard let animationView = self.animationView else {
+      return
+    }
+
+    animationView.subviews.forEach({ $0.removeFromSuperview() })
+  }
+
   
   // MARK: public
   
@@ -288,9 +299,8 @@ public class FoldingCell: UITableViewCell {
   
   func openAnimation(completion completion: CompletionHandler?) {
     
-    if animationView?.subviews.count == 0 { // added animation items if need
-      addImageItemsToAnimationView()
-    }
+    removeImageItemsFromAnimationView()
+    addImageItemsToAnimationView()
     
     guard let animationView = self.animationView else {
       return
@@ -341,9 +351,8 @@ public class FoldingCell: UITableViewCell {
   
   func closeAnimation(completion completion: CompletionHandler?) {
     
-    if animationView?.subviews.count == 0 { // added animation items if need
-      addImageItemsToAnimationView()
-    }
+    removeImageItemsFromAnimationView()
+    addImageItemsToAnimationView()
     
     guard let animationItemViews = self.animationItemViews else {
       fatalError()
@@ -385,9 +394,9 @@ public class FoldingCell: UITableViewCell {
     
     if let animationView = self.animationView {
       let firstItemView = animationView.subviews.filter{$0.tag == 0}.first
-      firstItemView?.layer.masksToBounds = false
+      firstItemView?.layer.cornerRadius = 0
       if let durationLast = durations.last {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((delay - durationLast * 1.5) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64((delay - durationLast - durationLast / 2.0) * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
           firstItemView?.layer.cornerRadius = self.foregroundView.layer.cornerRadius
         }
       }

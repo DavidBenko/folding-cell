@@ -2,9 +2,11 @@
 # FoldingCell
 [![CocoaPods](https://img.shields.io/cocoapods/p/FoldingCell.svg)](https://cocoapods.org/pods/FoldingCell)
 [![CocoaPods](https://img.shields.io/cocoapods/v/FoldingCell.svg)](http://cocoapods.org/pods/FoldingCell)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Ramotion/folding-cell)
 [![Twitter](https://img.shields.io/badge/Twitter-@Ramotion-blue.svg?style=flat)](http://twitter.com/Ramotion)
 [![Travis](https://img.shields.io/travis/Ramotion/folding-cell.svg)](https://travis-ci.org/Ramotion/folding-cell)
 [![codebeat badge](https://codebeat.co/badges/6f67da5d-c416-4bac-9fb7-c2dc938feedc)](https://codebeat.co/projects/github-com-ramotion-folding-cell)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 [shot on dribbble](https://dribbble.com/shots/2121350-Delivery-Card):
 ![Animation](Screenshots/folding-cell.gif)
@@ -14,7 +16,7 @@ The [iPhone mockup](https://store.ramotion.com/product/iphone-6-mockups?utm_sour
 ## Requirements
 
 - iOS 8.0+
-- Xcode 7.2
+- Xcode 7.3
 
 ## Installation
 
@@ -22,9 +24,13 @@ Just add the FoldingCell.swift file to your project.
 
 or use [CocoaPods](https://cocoapods.org) with Podfile:
 ``` ruby
-pod 'FoldingCell', '~> 0.7.2'
+pod 'FoldingCell', '~> 0.8.1'
 ```
-    
+
+or [Carthage](https://github.com/Carthage/Carthage) users can simply add to their `Cartfile`:
+```
+github "Ramotion/folding-cell"
+```
 
 ## Solution
 ![Solution](/Tutorial-resources/Solution.png)
@@ -34,7 +40,7 @@ pod 'FoldingCell', '~> 0.7.2'
 
 2) Add a UIView to your cell in your storyboard or nib file, inheriting from `RotatedView`.
 Connect the outlet from this view to the cell property `foregroundView`.
-Add constraints from this view to the superview, as in this picture: 
+Add constraints from this view to the superview, as in this picture:
 ![1.1](/Tutorial-resources/1.1.png)
 
 (constants of constraints may be different). Add the identifier `ForegroundViewTop`
@@ -124,7 +130,7 @@ Ok, we've finished configuring the cell.
             }
         }
     }
-``` 
+```
 
 6) Add this code to your new cell class
 ``` swift
